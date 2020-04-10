@@ -11,7 +11,7 @@ let app = express();
 
 //Set up mongoose connection
 let mongoose = require('mongoose');
-let mongoDB = 'mongodb+srv://<vineethay18@gmail.com>:<vinni@96>@cluster0-dzqd1.azure.mongodb.net/test?retryWrites=true&w=majority';
+let mongoDB = 'mongodb+srv://<vineethay18@gmail.com>:<vinni@96>@cluster0-dzqd1.azure.mongodb.net/local_library?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, { useNewUrlParser: true,useUnifiedTopology:true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
