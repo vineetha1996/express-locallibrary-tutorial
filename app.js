@@ -1,18 +1,20 @@
-let createError = require('http-errors');
-let express = require('express');
-let path = require('path');
-let cookieParser = require('cookie-parser');
-let logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const dotenv = require('dotenv');
 
-let indexRouter = require('./routes/index');
-let usersRouter = require('./routes/users');
-var catalogRouter = require('./routes/catalog');  //Import routes for "catalog" area of site
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const catalogRouter = require('./routes/catalog');  //Import routes for "catalog" area of site
 
-let app = express();
+const app = express();
+dotenv.config({ path: '.env' });
 
 //Set up mongoose connection
-let mongoose = require('mongoose');
-let mongoDB = 'mongodb+srv://<vineethay18@gmail.com>:<vinni@96>@cluster0-dzqd1.azure.mongodb.net/local_library?retryWrites=true&w=majority';
+const mongoose = require('mongoose');
+const mongoDB = 'mongodb+srv://<vineethay18@gmail.com>:<vinni@96>@cluster0-dzqd1.azure.mongodb.net/local_library?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, { useNewUrlParser: true,useUnifiedTopology:true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
