@@ -50,3 +50,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+dev_db_url = process.env.ATLAS_URI
