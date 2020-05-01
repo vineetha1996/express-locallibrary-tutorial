@@ -1,3 +1,6 @@
+var catalogRouter = require('./routes/catalog'); //Import routes for "catalog" area of site
+var compression = require('compression');
+var helmet = require('helmet');
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -10,11 +13,22 @@ const usersRouter = require('./routes/users');
 //const catalogRouter = require('./routes/catalog');  //Import routes for "catalog" area of site
 
 const app = express();
+app.use(helmet());
+
+app.use(compression()); //Compress all routes
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/catalog', catalogRouter); 
 dotenv.config({ path: '.env' });
 
 //Set up mongoose connection
 const mongoose = require('mongoose');
-const mongoDB = 'mongodb+srv://<vineethay18@gmail.com>:<vinni@96>@cluster0-dzqd1.azure.mongodb.net/local_library?retryWrites=true&w=majority';
+// const mongoDB = 'mongodb+srv://<vineethay18@gmail.com>:<vinni@96>@cluster0-dzqd1.azure.mongodb.net/local_library?retryWrites=true&w=majority';
+var dev_db_url = 'mongodb+srv://vineethay18@gmail.com:vinni@96@cluster0-mbdj7.mongodb.net/local_library?retryWrites=true'
+var mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, { useNewUrlParser: true,useUnifiedTopology:true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
