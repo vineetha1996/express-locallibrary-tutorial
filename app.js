@@ -1,3 +1,4 @@
+var debug = require('debug')('author');
 var catalogRouter = require('./routes/catalog'); //Import routes for "catalog" area of site
 var compression = require('compression');
 var helmet = require('helmet');
